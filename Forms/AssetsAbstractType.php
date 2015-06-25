@@ -1,6 +1,6 @@
 <?php
 
-	namespace Uneak\FormsManagerBundle\Form;
+	namespace Uneak\FormsManagerBundle\Forms;
 
 	use Symfony\Component\Form\AbstractType;
 	use Symfony\Component\Form\FormView;

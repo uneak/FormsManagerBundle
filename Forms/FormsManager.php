@@ -1,15 +1,15 @@
 <?php
 
-	namespace Uneak\FormsManagerBundle\Form;
+	namespace Uneak\FormsManagerBundle\Forms;
 
 
 	use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 	use Symfony\Component\Form\FormInterface;
 	use Symfony\Component\Form\FormView;
-	use Uneak\AssetsManagerBundle\Assets\AssetsDependencyInterface;
+    use Uneak\AssetsManagerBundle\Assets\AssetsContainerInterface;
 	use Uneak\AssetsManagerBundle\Assets\AssetsManager;
 
-	class FormManager implements AssetsDependencyInterface {
+	class FormsManager implements AssetsContainerInterface {
 
 
 		public $assetsFormType = array();
@@ -52,7 +52,7 @@
 		}
 
 
-		public function getExternalFiles($group = null) {
+		public function getAssetsArray($group = null) {
 			$array = array();
 
 			foreach ($this->assetsFormType as $assetsDependency) {
