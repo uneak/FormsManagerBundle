@@ -1,0 +1,14 @@
+parameters:
+    uneak.formsmanager.class: Uneak\FormsManagerBundle\Forms\FormsManager
+
+services:
+
+    uneak.formsmanager:
+        class: %uneak.formsmanager.class%
+        tags:
+            - { name: uneak.assetsmanager.assets }
+
+
+
+
+
