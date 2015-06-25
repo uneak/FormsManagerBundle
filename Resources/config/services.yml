@@ -5,6 +5,8 @@ services:
 
     uneak.formsmanager:
         class: %uneak.formsmanager.class%
+        arguments:
+            - @twig.form.engine
         tags:
             - { name: uneak.assetsmanager.assets }
 

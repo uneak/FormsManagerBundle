@@ -11,47 +11,48 @@
 		public function __construct(){
 		}
 
-		protected function _registerExternalFile(FormView $formView) {
+
+		protected function _registerAssets(FormView $formView) {
 			return array();
 		}
 
-		protected function _registerScript(FormView $formView) {
-			return array();
-		}
 
 		public function getTheme() {
 			return null;
 		}
 
-		public function getExternalFiles(FormView $formView, $group = null) {
-			$externalFiles = $this->_registerExternalFile($formView);
+
+		public function getAssetsArray(FormView $formView, $group = null) {
+			$assets = $this->_registerAssets($formView);
 			$array = array();
-			foreach ($externalFiles as $key => $externalFile) {
-				if ($group) {
-					if ($externalFile->getGroup() == $group) {
-						$array[$key] = $externalFile;
-					}
-				} else {
-					$array[$key] = $externalFile;
-				}
-			}
+			$this->_mergeSelfAssetsArray($assets, $array, $group);
 			return $array;
 		}
 
-		public function getScripts(FormView $formView, $group = null) {
-			$scripts = $this->_registerScript($formView);
-			$array = array();
-			foreach ($scripts as $key => $script) {
+
+		protected function _mergeSelfAssetsArray($assets, &$array, $group) {
+			foreach ($assets as $key => $asset) {
 				if ($group) {
-					if ($script->getGroup() == $group) {
-						$array[$key] = $script;
+					if ($asset->getGroup() == $group) {
+						$this->_addAssetToArray($key, $asset, $array);
 					}
 				} else {
-					$array[$key] = $script;
+					$this->_addAssetToArray($key, $asset, $array);
 				}
 			}
-
-			return $array;
 		}
+
+		protected function _addAssetToArray($key, $asset, &$array) {
+			if (!isset($array[$key])) {
+				$array[$key] = $asset;
+			} elseif (is_array($array[$key])) {
+				array_push($array[$key], $asset);
+			} else {
+				$prevAsset = $array[$key];
+				unset($array[$key]);
+				$array[$key] = array($prevAsset, $asset);
+			}
+		}
+
 
 	}
