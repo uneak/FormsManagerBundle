@@ -6,9 +6,9 @@
 	use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 	use Symfony\Component\Form\FormInterface;
 	use Symfony\Component\Form\FormView;
-	use Uneak\AssetsManagerBundle\Assets\AssetsContainer;
+	use Uneak\AssetsManagerBundle\Assets\AssetsComponent;
 
-	class FormsManager extends AssetsContainer {
+	class FormsManager extends AssetsComponent {
 
 
 		public $assetTypes = array();
@@ -43,7 +43,6 @@
 		}
 
 
-	
 		public function getAssetsArray($group = null) {
 			$array = array();
 			foreach ($this->assetTypes as $assetType) {

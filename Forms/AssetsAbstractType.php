@@ -11,11 +11,8 @@
 		public function __construct(){
 		}
 
-
-		protected function _registerAssets(FormView $formView) {
-			return array();
+		protected function _registerAssets(array &$assets, $parameters = null) {
 		}
-
 
 		public function getTheme() {
 			return null;
