@@ -8,10 +8,10 @@
 	use Symfony\Component\Form\FormTypeInterface;
 	use Symfony\Component\Form\FormView;
 	use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-	use Uneak\AssetsManagerBundle\Assets\AssetsComponent;
+	use Uneak\AssetsManagerBundle\Assets\AssetsBuilder;
 	use Uneak\AssetsManagerBundle\Assets\AssetsDependencyInterface;
 
-	abstract class AssetsComponentType extends AssetsComponent implements FormTypeInterface {
+	abstract class AssetsBuilderType extends AssetsBuilder implements FormTypeInterface {
 
 		/**
 		 * {@inheritdoc}

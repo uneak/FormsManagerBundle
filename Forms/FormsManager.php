@@ -6,10 +6,10 @@
 	use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 	use Symfony\Component\Form\FormInterface;
 	use Symfony\Component\Form\FormView;
-	use Uneak\AssetsManagerBundle\Assets\AssetBuilder;
-	use Uneak\AssetsManagerBundle\Assets\AssetsComponent;
+	use Uneak\AssetsManagerBundle\Assets\AssetsBuilder;
+	use Uneak\AssetsManagerBundle\Assets\AssetsBuilderManager;
 
-	class FormsManager extends AssetsComponent {
+	class FormsManager extends AssetsBuilder {
 
 
 		protected $assetTypes = array();
@@ -33,7 +33,7 @@
 
 			$innerType = $form->getConfig()->getType()->getInnerType();
 
-			if ($innerType instanceOf AssetsComponentType) {
+			if ($innerType instanceOf AssetsBuilderType) {
 				if ($innerType->getTheme()) {
 					$this->twigRendererEngine->setTheme($view, $innerType->getTheme());
 				}
@@ -44,7 +44,7 @@
 		}
 
 
-		public function processBuildAssets(AssetBuilder $builder) {
+		public function processBuildAssets(AssetsBuilderManager $builder) {
 			foreach ($this->assetTypes as $assetType) {
 				$assetType['object']->buildAsset($builder, $assetType['view']);
 			}
