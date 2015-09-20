@@ -8,15 +8,18 @@
 	use Symfony\Component\Form\FormView;
 	use Uneak\AssetsManagerBundle\Assets\AssetsBuilder;
 	use Uneak\AssetsManagerBundle\Assets\AssetsBuilderManager;
+    use Uneak\TemplatesManagerBundle\Templates\TemplatesManager;
 
-	class FormsManager extends AssetsBuilder {
+    class FormsManager extends AssetsBuilder {
 
 
 		protected $assetTypes = array();
 		protected $twigRendererEngine;
+		protected $templatesManager;
 
-		public function __construct(TwigRendererEngine $twigRendererEngine) {
+		public function __construct(TwigRendererEngine $twigRendererEngine, TemplatesManager $templatesManager) {
 			$this->twigRendererEngine = $twigRendererEngine;
+			$this->templatesManager = $templatesManager;
 		}
 
 		public function createView(FormInterface $form, FormView $view = null) {
@@ -33,9 +36,11 @@
 
 			$innerType = $form->getConfig()->getType()->getInnerType();
 
-			if ($innerType instanceOf AssetsBuilderType) {
-				if ($innerType->getTheme()) {
-					$this->twigRendererEngine->setTheme($view, $innerType->getTheme());
+			if ($innerType instanceOf AssetsFormType) {
+                $themeTemplate = $innerType->getTheme();
+				if ($themeTemplate) {
+                    $themeTemplate = ($this->templatesManager->hasTemplate($themeTemplate)) ? $this->templatesManager->getTemplate($themeTemplate) : $themeTemplate;
+					$this->twigRendererEngine->setTheme($view, $themeTemplate);
 				}
 				array_push($this->assetTypes, array('object' => $innerType, 'view' => $view));
 			}

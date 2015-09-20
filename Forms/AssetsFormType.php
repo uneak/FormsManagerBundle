@@ -11,7 +11,7 @@
 	use Uneak\AssetsManagerBundle\Assets\AssetsBuilder;
 	use Uneak\AssetsManagerBundle\Assets\AssetsDependencyInterface;
 
-	abstract class AssetsBuilderType extends AssetsBuilder implements FormTypeInterface {
+	abstract class AssetsFormType extends AssetsBuilder implements FormTypeInterface {
 
 		/**
 		 * {@inheritdoc}
