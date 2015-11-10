@@ -49,11 +49,19 @@
 		}
 
 
+
 		public function processBuildAssets(AssetsBuilderManager $builder) {
+			if ($this->isAssetsBuilded()) {
+				return;
+			}
+
 			foreach ($this->assetTypes as $assetType) {
 				$assetType['object']->buildAsset($builder, $assetType['view']);
 			}
+
+			$this->assetsBuilded = true;
 		}
+
 
 
 	}
